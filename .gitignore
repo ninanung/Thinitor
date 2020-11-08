@@ -80,7 +80,9 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+
+# dist폴더를 일단 살려둔다
+# dist
 
 # Gatsby files
 .cache/
