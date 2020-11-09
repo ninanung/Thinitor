@@ -1,11 +1,13 @@
 const path = require('path');
 
 module.exports = {
-    entry: path.join(__dirname, './src/index.ts'),
+    entry: path.join(__dirname, 'src/index.ts'),
     devtool: 'source-map',
     output: {
-        filename: 'dist/app.js',
-        path: __dirname
+        filename: 'app.js',
+        path: path.resolve(__dirname, 'dist'),
+        libraryTarget: 'umd',
+    	library: 'Thinitor'
     },
     module: {
         rules: [

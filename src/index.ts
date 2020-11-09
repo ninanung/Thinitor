@@ -1,1 +1,2 @@
-import Person from './person';
+import Person from './modules/person';
+export default Person;
