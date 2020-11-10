@@ -1,2 +1,2 @@
-import Person from './modules/person';
-export default Person;
+import editableElement from './modules/editable_element';
+export default editableElement;
