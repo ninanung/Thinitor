@@ -16,11 +16,11 @@ class RootElement {
         })
     }
 
-    public getHtml() {
+    public getHtml(): string {
         return this.rootElement.innerHTML;
     }
 
-    public getElement() {
+    public getElement(): Element {
         return this.rootElement;
     }
 }
