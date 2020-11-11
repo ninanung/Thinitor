@@ -1,2 +1,2 @@
-import editableElement from './modules/editable_element';
-export default editableElement;
+import RootElement from './classes/root_element';
+export default RootElement;
