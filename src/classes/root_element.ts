@@ -1,26 +1,39 @@
-// import { createP } from '../modules/element_creator/create_text_element';
-import { createP } from '../modules/element_creator/create_text_element';
 import { listenEnterKeyInTheRoot } from '../modules/event_listener/root_element_key_listener';
 
+import { generateRandomString } from '../utils/common';
+import { logError } from '../utils/errorLogs';
+
+import TextElement from './text_element';
+
 class RootElement {
-    private rootElement: Element
+    private element: Element;
+    private children: Array<Element>;
+    private classes: Array<TextElement>
 
     constructor(id: string) {
         const element = document.getElementById(id);
-        if (!element) console.error(`Can't find the element has "${id}" id.`);
+        if (!element) logError(`Can't find the element has "${id}" id.`);
         else {
-            element.appendChild(createP());
             listenEnterKeyInTheRoot(element);
-            this.rootElement = element;
+            this.element = element;
+            const newElement = new TextElement(generateRandomString());
+            this.addNewChild(newElement);
         }
     }
 
+    private addNewChild(child: TextElement) {
+        console.log(this.getElement());
+        this.element.appendChild(child.getElement());
+        this.children = [...this.children, child.getElement()];
+        this.classes = [...this.classes, child];
+    }
+
     public getHtml(): string {
-        return this.rootElement.innerHTML;
+        return this.element.innerHTML;
     }
 
     public getElement(): Element {
-        return this.rootElement;
+        return this.element;
     }
 }
 
