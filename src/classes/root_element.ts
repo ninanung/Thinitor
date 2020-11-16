@@ -6,9 +6,8 @@ import { logError } from '../utils/errorLogs';
 import TextElement from './text_element';
 
 class RootElement {
-    private rootElement: Element;
+    private readonly rootElement: Element;
     private element: Element;
-    private children: Array<Element> = [];
     private classes: Array<TextElement> = [];
 
     constructor(id: string) {
@@ -23,14 +22,27 @@ class RootElement {
         }
     }
 
-    private addNewChild(child: TextElement) {
-        this.element.appendChild(child.getElement());
-        this.children = [...this.children, child.getElement()];
-        this.classes = [...this.classes, child];
+    public addNewChild(child: TextElement): void {
+        let focusedIndex: number;
+        const focusedElement = document.activeElement;
+        this.classes.forEach((childClass, index) => {
+            if (childClass.getElementId() === focusedElement.id) focusedIndex = index; 
+        });
+        if (focusedIndex + 1 === this.classes.length) {
+            this.element.appendChild(child.getElement());
+            this.classes = [...this.classes, child];
+            // TODO make focus to new element
+            return;
+        }
+        // TODO insert new element and make focus
     }
 
     public getRootElement(): Element {
         return this.rootElement;
+    }
+
+    public getClasses(): Array<TextElement> {
+        return this.classes;
     }
 
     public getHtml(): string {
