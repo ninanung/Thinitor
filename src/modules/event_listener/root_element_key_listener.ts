@@ -9,7 +9,7 @@ export const listenEnterKeyInTheRoot = (root: RootElement): void => {
         if (e.key === 'Enter') {
             // check if the focused element is child of root element
             if (document.activeElement.id.includes('thinitor_element_')) {
-                e.preventDefault;
+                e.preventDefault();
                 const newElementId = generateRandomString();
                 const newElement = new TextElement(newElementId);
                 root.addNewChild(newElement);

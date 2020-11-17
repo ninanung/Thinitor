@@ -7,3 +7,7 @@ export const generateRandomString = (): string => {
     }
     return `thinitor_element_${result}`;
 }
+
+export const insertAfter = (rootNode: Element,newNode: Element, existingNode: Element): void => {
+    rootNode.insertBefore(newNode, existingNode.nextSibling);
+}

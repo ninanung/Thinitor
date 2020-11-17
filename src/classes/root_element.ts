@@ -1,6 +1,6 @@
 import { listenEnterKeyInTheRoot } from '../modules/event_listener/root_element_key_listener';
 
-import { generateRandomString } from '../utils/common';
+import { generateRandomString, insertAfter } from '../utils/common';
 import { logError } from '../utils/errorLogs';
 
 import TextElement from './text_element';
@@ -17,7 +17,8 @@ class RootElement {
             this.rootElement = element;
             this.element = element;
             const newElement = new TextElement(generateRandomString());
-            this.addNewChild(newElement);
+            this.element.appendChild(newElement.getElement());
+            this.classes = [...this.classes, newElement];
             listenEnterKeyInTheRoot(this);
         }
     }
@@ -31,10 +32,13 @@ class RootElement {
         if (focusedIndex + 1 === this.classes.length) {
             this.element.appendChild(child.getElement());
             this.classes = [...this.classes, child];
-            // TODO make focus to new element
+            document.getElementById(child.getElementId()).focus();
             return;
         }
-        // TODO insert new element and make focus
+        insertAfter(this.element, child.getElement(), focusedElement);
+        this.classes.splice(focusedIndex, 0, child);
+        document.getElementById(child.getElementId()).focus();
+        return;
     }
 
     public getRootElement(): Element {
