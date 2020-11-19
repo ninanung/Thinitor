@@ -11,3 +11,15 @@ export const generateRandomString = (): string => {
 export const insertAfter = (rootNode: Element,newNode: Element, existingNode: Element): void => {
     rootNode.insertBefore(newNode, existingNode.nextSibling);
 }
+
+export const getElementIndex = (element: Element, id: string): number => {
+    const children = element.parentElement.children;
+    let childIndex: number;
+    for (let index = 0; index < children.length; index++) {
+        if (children[index].id === id) {
+            childIndex = index;
+            break;
+        }
+    }
+    return childIndex;
+}

@@ -1,4 +1,4 @@
-import { listenEnterKeyInTheRoot } from '../modules/event_listener/root_element_key_listener';
+import { listenEnterKeyInTheRoot } from '../modules/event_listener/root_element_keyboard_event';
 
 import { generateRandomString, insertAfter } from '../utils/common';
 import { logError } from '../utils/errorLogs';
