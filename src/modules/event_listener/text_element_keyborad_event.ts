@@ -19,3 +19,15 @@ export const listenBackspaceKeyInTheText = (child: TextElement): void => {
         }
     });
 }
+
+export const listenArrowKeyInTheText = (child: TextElement): void => {
+    const listenElement = child.getElement();
+    listenElement.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowUp') {
+            // TODO arrow-up key to move element focus up
+        }
+        if (e.key === 'ArrowDown') {
+            // TODO arrow-down key to move element focus down
+        }
+    });
+}

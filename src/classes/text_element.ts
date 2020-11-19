@@ -2,7 +2,10 @@ import { createElement } from '../modules/element_creator/create_element';
 
 import { logError } from '../utils/errorLogs';
 
-import { listenBackspaceKeyInTheText } from '../modules/event_listener/text_element_keyborad_event';
+import { 
+    listenBackspaceKeyInTheText, 
+    listenArrowKeyInTheText
+} from '../modules/event_listener/text_element_keyborad_event';
 
 class TextElement {
     private id: string;
@@ -14,6 +17,7 @@ class TextElement {
             this.id = id;
             this.element = createElement(id, 'p');
             listenBackspaceKeyInTheText(this);
+            listenArrowKeyInTheText(this);
         }
     }
 
