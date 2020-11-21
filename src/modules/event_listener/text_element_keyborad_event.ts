@@ -24,10 +24,12 @@ export const listenArrowKeyInTheText = (child: TextElement): void => {
     const listenElement = child.getElement();
     listenElement.addEventListener('keydown', (e: KeyboardEvent) => {
         if (e.key === 'ArrowUp') {
-            // TODO arrow-up key to move element focus up
+            const previousChildElement = document.getElementById(child.getElementId()).previousElementSibling
+            if (previousChildElement) document.getElementById(previousChildElement.id).focus();
         }
         if (e.key === 'ArrowDown') {
-            // TODO arrow-down key to move element focus down
+            const nextChildElement = document.getElementById(child.getElementId()).nextElementSibling;
+            if (nextChildElement) document.getElementById(nextChildElement.id).focus();
         }
     });
 }
