@@ -23,3 +23,7 @@ export const getElementIndex = (element: Element, id: string): number => {
     }
     return childIndex;
 }
+
+export const checkIsChildElement = (element: Element): boolean => {
+    return element.id.includes('thinitor_element_');
+}
