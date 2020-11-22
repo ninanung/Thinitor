@@ -1,4 +1,7 @@
-import { listenEnterKeyInTheRoot } from '../modules/event_listener/root_element_keyboard_event';
+import { 
+    listenEnterKeyInTheRoot,
+    listenBackspaceKeyInTheText
+} from '../modules/event_listener/root_element_keyboard_event';
 
 import { generateRandomString, insertAfter } from '../utils/common';
 import { logError } from '../utils/errorLogs';
@@ -20,6 +23,7 @@ class RootElement {
             this.element.appendChild(newElement.getElement());
             this.classes = [...this.classes, newElement];
             listenEnterKeyInTheRoot(this);
+            listenBackspaceKeyInTheText(this);
         }
     }
 
@@ -39,6 +43,16 @@ class RootElement {
         this.classes.splice(focusedIndex, 0, child);
         document.getElementById(child.getElementId()).focus();
         return;
+    }
+
+    public removeChild(childElement: Element): void {
+        let focusedIndex: number;
+        this.classes.forEach((childClass, index) => {
+            if (childClass.getElementId() === childElement.id) focusedIndex = index; 
+        });
+        document.getElementById(childElement.previousElementSibling.id).focus();
+        this.classes.splice(focusedIndex, 1);
+        childElement.remove();
     }
 
     public getRootElement(): Element {
