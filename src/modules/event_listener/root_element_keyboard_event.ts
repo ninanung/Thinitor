@@ -21,7 +21,7 @@ export const listenEnterKeyInTheRoot = (root: RootElement): void => {
     });
 }
 
-export const listenBackspaceKeyInTheText = (root: RootElement): void => {
+export const listenBackspaceKeyInTheRoot = (root: RootElement): void => {
     const listenElement = root.getElement();
     listenElement.addEventListener('keydown', (e: KeyboardEvent) => {
         if (e.key === 'Backspace') {
@@ -33,6 +33,38 @@ export const listenBackspaceKeyInTheText = (root: RootElement): void => {
                     e.preventDefault();
                     root.removeChild(focusedElement);
                 }
+            }
+        }
+    });
+}
+
+// TODO only in ArrowUp keydown event, caret don't move to end of the line. Donno why...
+export const listenArrowKeyInTheRoot = (root: RootElement): void => {
+    const listenElement = root.getElement();
+    listenElement.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowUp') {
+            const previousChildElement = document.activeElement.previousElementSibling
+            console.log(previousChildElement);
+            if (previousChildElement) {
+                const newRange = document.createRange();
+                const node = previousChildElement.childNodes[previousChildElement.childNodes.length - 1];
+                newRange.setStart(node, node.nodeValue.length);
+                newRange.collapse(true);
+                const selection = document.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            }
+        }
+        if (e.key === 'ArrowDown') {
+            const nextChildElement = document.activeElement.nextElementSibling;
+            if (nextChildElement) {
+                const newRange = document.createRange();
+                const node = nextChildElement.childNodes[nextChildElement.childNodes.length - 1];
+                newRange.setStart(node, node.nodeValue.length);
+                newRange.collapse(true);
+                const selection = document.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(newRange);
             }
         }
     });
