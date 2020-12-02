@@ -41,31 +41,36 @@ export const listenBackspaceKeyInTheRoot = (root: RootElement): void => {
 // TODO only in ArrowUp keydown event, caret don't move to end of the line. Donno why...
 export const listenArrowKeyInTheRoot = (root: RootElement): void => {
     const listenElement = root.getElement();
-    listenElement.addEventListener('keydown', (e: KeyboardEvent) => {
+    listenElement.addEventListener('keyup', (e: KeyboardEvent) => {
         if (e.key === 'ArrowUp') {
             const previousChildElement = document.activeElement.previousElementSibling
-            console.log(previousChildElement);
             if (previousChildElement) {
                 const newRange = document.createRange();
                 const node = previousChildElement.childNodes[previousChildElement.childNodes.length - 1];
-                newRange.setStart(node, node.nodeValue.length);
-                newRange.collapse(true);
-                const selection = document.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(newRange);
+                if (node && node.nodeValue && node.nodeValue.length > 0) {
+                    newRange.setStart(node, node.nodeValue.length);
+                    newRange.collapse(true);
+                    const selection = document.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(newRange);
+                } else document.getElementById(previousChildElement.id).focus();
             }
+            return;
         }
         if (e.key === 'ArrowDown') {
             const nextChildElement = document.activeElement.nextElementSibling;
             if (nextChildElement) {
                 const newRange = document.createRange();
                 const node = nextChildElement.childNodes[nextChildElement.childNodes.length - 1];
-                newRange.setStart(node, node.nodeValue.length);
-                newRange.collapse(true);
-                const selection = document.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(newRange);
+                if (node && node.nodeValue && node.nodeValue.length > 0) {
+                    newRange.setStart(node, node.nodeValue.length);
+                    newRange.collapse(true);
+                    const selection = document.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(newRange);
+                } else document.getElementById(nextChildElement.id).focus();
             }
+            return;
         }
     });
 }
