@@ -38,7 +38,7 @@ export const listenBackspaceKeyInTheRoot = (root: RootElement): void => {
     });
 }
 
-// TODO only in ArrowUp keydown event, caret don't move to end of the line. Donno why...
+// TODO keydown to make new range
 export const listenArrowKeyInTheRoot = (root: RootElement): void => {
     const listenElement = root.getElement();
     listenElement.addEventListener('keyup', (e: KeyboardEvent) => {
