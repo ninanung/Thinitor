@@ -1,7 +1,6 @@
 import { 
     listenEnterKeyInTheRoot,
-    listenBackspaceKeyInTheRoot,
-    listenArrowKeyInTheRoot
+    listenBackspaceKeyInTheRoot
 } from '../modules/event_listener/root_element_keyboard_event';
 
 import { generateRandomString, insertAfter } from '../utils/common';
@@ -25,7 +24,6 @@ class RootElement {
             this.classes = [...this.classes, newElement];
             listenEnterKeyInTheRoot(this);
             listenBackspaceKeyInTheRoot(this);
-            listenArrowKeyInTheRoot(this);
         }
     }
 

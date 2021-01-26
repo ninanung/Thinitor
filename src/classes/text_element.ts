@@ -2,9 +2,9 @@ import { createElement } from '../modules/element_creator/create_element';
 
 import { logError } from '../utils/errorLogs';
 
-/* import { 
+import { 
     listenArrowKeyInTheText
-} from '../modules/event_listener/text_element_keyborad_event'; */
+} from '../modules/event_listener/text_element_keyborad_event';
 
 class TextElement {
     private id: string;
@@ -15,7 +15,7 @@ class TextElement {
         else {
             this.id = id;
             this.element = createElement(id, 'p');
-            // listenArrowKeyInTheText(this);
+            listenArrowKeyInTheText(this);
         }
     }
 
