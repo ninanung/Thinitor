@@ -4,7 +4,7 @@ import {
 } from '../modules/event_listener/root_element_keyboard_event';
 
 import { generateRandomString, insertAfter } from '../utils/common';
-import { logError } from '../utils/errorLogs';
+import { logError } from '../utils/error_logs';
 
 import TextElement from './text_element';
 

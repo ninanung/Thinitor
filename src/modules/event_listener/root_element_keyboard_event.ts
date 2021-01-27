@@ -10,8 +10,11 @@ export const listenEnterKeyInTheRoot = (root: RootElement): void => {
     const listenElement = root.getElement();
     listenElement.addEventListener('keydown', (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
+            const focusedElement = document.activeElement;
             // check if the focused element is child of root element
-            if (checkIsChildElement(document.activeElement)) {
+            if (checkIsChildElement(focusedElement)) {
+                // focus된 부분부터의 innerHTML을 다음줄로 같이 이동시키는 기능 필요
+                // 아마도 activeElement의 childElement를 일일이 배열화 해서 넘겨야 할 것 같음
                 e.preventDefault();
                 const newElementId = generateRandomString();
                 const newElement = new TextElement(newElementId);

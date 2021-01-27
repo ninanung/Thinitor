@@ -7,24 +7,24 @@ export const listenArrowKeyInTheText = (child: TextElement): void => {
         if (e.key === 'ArrowUp') {
             const previousChildElement = document.getElementById(child.getElementId()).previousElementSibling
             if (!previousChildElement) return;
+            e.preventDefault();
             const newRange = document.createRange();
             newRange.selectNodeContents(previousChildElement);
             newRange.collapse(false);
             const selection = window.getSelection();
             selection.removeAllRanges();
             selection.addRange(newRange);
-            return;
         }
         if (e.key === 'ArrowDown') {
             const nextChildElement = document.getElementById(child.getElementId()).nextElementSibling;
             if (!nextChildElement) return;
+            e.preventDefault();
             const newRange = document.createRange();
             newRange.selectNodeContents(nextChildElement);
             newRange.collapse(false);
             const selection = window.getSelection();
             selection.removeAllRanges();
             selection.addRange(newRange);
-            return;
         }
     });
 }

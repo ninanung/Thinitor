@@ -1,6 +1,6 @@
 import { createElement } from '../modules/element_creator/create_element';
 
-import { logError } from '../utils/errorLogs';
+import { logError } from '../utils/error_logs';
 
 import { 
     listenArrowKeyInTheText
@@ -10,11 +10,12 @@ class TextElement {
     private id: string;
     private element: Element;
 
-    constructor(id: string) {
+    constructor(id: string, html = '') {
         if (!id) logError('Fail to create element, id is missing.');
         else {
             this.id = id;
             this.element = createElement(id, 'p');
+            this.element.innerHTML = html;
             listenArrowKeyInTheText(this);
         }
     }

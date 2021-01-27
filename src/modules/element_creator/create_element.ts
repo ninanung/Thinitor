@@ -1,4 +1,4 @@
-import { logUndefinedParameter } from '../../utils/errorLogs';
+import { logUndefinedParameter } from '../../utils/error_logs';
 
 export const createElement = (id: string, tag: string): Element => {
     if (!id || !tag) logUndefinedParameter('createElement');
