@@ -1,4 +1,5 @@
 import TextElement from '../../classes/text_element';
+import { setCaretToEnd } from '../../utils/caret'
 // import { createElement } from '../element_creator/create_element';
 
 export const listenArrowKeyInTheText = (child: TextElement): void => {
@@ -8,23 +9,13 @@ export const listenArrowKeyInTheText = (child: TextElement): void => {
             const previousChildElement = document.getElementById(child.getElementId()).previousElementSibling
             if (!previousChildElement) return;
             e.preventDefault();
-            const newRange = document.createRange();
-            newRange.selectNodeContents(previousChildElement);
-            newRange.collapse(false);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(newRange);
+            setCaretToEnd(previousChildElement);
         }
         if (e.key === 'ArrowDown') {
             const nextChildElement = document.getElementById(child.getElementId()).nextElementSibling;
             if (!nextChildElement) return;
             e.preventDefault();
-            const newRange = document.createRange();
-            newRange.selectNodeContents(nextChildElement);
-            newRange.collapse(false);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(newRange);
+            setCaretToEnd(nextChildElement);
         }
     });
 }

@@ -2,6 +2,7 @@ import {
     generateRandomString,
     checkIsChildElement
 } from '../../utils/common';
+import { getCaretPosition, setCaretToEnd } from '../../utils/caret';
 
 import RootElement from '../../classes/root_element';
 import TextElement from '../../classes/text_element';
@@ -14,7 +15,8 @@ export const listenEnterKeyInTheRoot = (root: RootElement): void => {
             // check if the focused element is child of root element
             if (checkIsChildElement(focusedElement)) {
                 // focus된 부분부터의 innerHTML을 다음줄로 같이 이동시키는 기능 필요
-                // 아마도 activeElement의 childElement를 일일이 배열화 해서 넘겨야 할 것 같음
+                // caret위치부터의 innerHTML을 완벽하게 잘라내는 기능이 필요함
+                console.log(getCaretPosition(focusedElement));
                 e.preventDefault();
                 const newElementId = generateRandomString();
                 const newElement = new TextElement(newElementId);
@@ -32,9 +34,11 @@ export const listenBackspaceKeyInTheRoot = (root: RootElement): void => {
             // check if the focused element is child of root element
             if (checkIsChildElement(focusedElement)) {
                 // check if child has content and is not first child of root element
-                if (focusedElement.innerHTML.length < 1 && focusedElement.previousElementSibling) {
+                const previousChildElement = focusedElement.previousElementSibling;
+                if (focusedElement.innerHTML.length < 1 && previousChildElement) {
                     e.preventDefault();
                     root.removeChild(focusedElement);
+                    setCaretToEnd(previousChildElement);
                 }
             }
         }
