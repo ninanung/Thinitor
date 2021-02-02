@@ -2,7 +2,11 @@ import {
     generateRandomString,
     checkIsChildElement
 } from '../../utils/common';
-import { getCaretPosition, setCaretToEnd } from '../../utils/caret';
+import { 
+    getCaretPosition, 
+    setCaretToEnd, 
+    getDeferentHtmlString 
+} from '../../utils/caret';
 
 import RootElement from '../../classes/root_element';
 import TextElement from '../../classes/text_element';
@@ -16,7 +20,10 @@ export const listenEnterKeyInTheRoot = (root: RootElement): void => {
             if (checkIsChildElement(focusedElement)) {
                 // focus된 부분부터의 innerHTML을 다음줄로 같이 이동시키는 기능 필요
                 // caret위치부터의 innerHTML을 완벽하게 잘라내는 기능이 필요함
-                console.log(getCaretPosition(focusedElement));
+                const caretPosition = getCaretPosition(focusedElement);
+                const htmlText = focusedElement.innerHTML;
+                const commonText = focusedElement.textContent;
+                console.log(getDeferentHtmlString(htmlText, commonText));
                 e.preventDefault();
                 const newElementId = generateRandomString();
                 const newElement = new TextElement(newElementId);
