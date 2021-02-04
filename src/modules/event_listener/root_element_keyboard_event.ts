@@ -23,7 +23,7 @@ export const listenEnterKeyInTheRoot = (root: RootElement): void => {
                 const caretPosition = getCaretPosition(focusedElement);
                 const htmlText = focusedElement.innerHTML;
                 const commonText = focusedElement.textContent;
-                console.log(getDeferentHtmlString(htmlText, commonText));
+                console.log(getDeferentHtmlString('123<a>rs<h2>45</h2></a>67', '123rs4567'));
                 e.preventDefault();
                 const newElementId = generateRandomString();
                 const newElement = new TextElement(newElementId);

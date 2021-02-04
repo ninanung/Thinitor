@@ -40,16 +40,27 @@ type Result = {
     indexArray: Array<number>
 }
 
+// html과 일반 content text의 다른 부분을 찾아서 array형태로 return
 export const getDeferentHtmlString = (html: string, text: string): Result => {
     // return value
     const result: Result = {
         stringArray: [],
         indexArray: []
     }
-    for (let index = 0; index < html.length; index++) {
-        if (html[index] !== text[index]) {
-            // html string과 text string을 비교해서 다른부분에 대한 결과를 도출해야함
-            console.log(html[index], text[index]);
+    const htmlSplit = html.split('');
+    const textSplit = text.split('');
+    let deferentWord = '';
+    for (let index = 0; index < textSplit.length; index++) {
+        if (htmlSplit[index] !== textSplit[index]) {
+            deferentWord += htmlSplit[index];
+            htmlSplit.splice(index, 1);
+            index -= 1;
+        } else {
+            if (deferentWord) {
+                result.stringArray.push(deferentWord);
+                result.indexArray.push(index);
+                deferentWord = ''
+            }
         }
     }
     return result;
